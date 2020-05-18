@@ -1,0 +1,12 @@
+^{}
+{:preloads [miggens_frontend.core]
+ :main "miggens_frontend.core"
+ :output-to "work/transpiled/main.js"
+ :output-dir "work/transpiled"
+ :asset-path "work/transpiled"
+ :optimizations :advanced
+ :verbose true
+ :static-fns true
+ :warnings true
+ :watch-fn (fn [] (println "TEST BUILD!"))
+ :foreign-libs {}}

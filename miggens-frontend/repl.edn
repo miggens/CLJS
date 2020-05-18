@@ -1,0 +1,12 @@
+^{}
+{
+ :analyze-path "src/"
+ :repl-requires ['[cljs.repl :refer-macros [source doc find-doc apropos dir pst]]
+                 '[cljs.pprint :refer [pprint] :refer-macros [pp]]]
+ :repl-verbose true
+ :working-dir "work/transpiled/"
+ :watch "src/"
+ :watch-fn (fn [] (println "REPL..."))
+ :static-dir ["resources/public/" "work/transpiled/"]
+ :src "src/"
+ :launch-browser false}

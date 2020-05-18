@@ -1,0 +1,73 @@
+
+.left-right-15 {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.top-bottom {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.bottom-right {
+    position: absolute;
+    top: 40%;
+    text-align: right;
+}
+
+.site-background {
+    background-image: linear-gradient(#f4f4f4, #ececec);
+    border-radius: 4px;
+    margin-top: 50px;
+}
+
+.page-header {
+    margin-top: 100px;
+    margin-bottom: 30px;
+    font-family: "Raleway";
+    font-weight: 300;
+}
+
+.paragraph {
+    font-family: "Raleway";
+    font-weight: 200;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.title-font-weight {
+    font-family: "Raleway";
+    font-weight: 300;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+.about-image {
+    margin-bottom: 20px;
+}
+
+.blog-side-list {
+    margin-top: 125px;
+    margin-bottom: 30px;
+    font-family: "Raleway";
+    font-weight: 300;
+}
+
+.blog-side-item {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-right: 20px;
+    border-radius: 4px;
+    padding: 10px 10px 10px 10px;
+}
+
+.hero-section {
+    background-image: linear-gradient(#633a82, #512b58);
+    background-color: #cccccc; /* Used if the image is unavailable */
+    height: 500px; /* You must set a specified height */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Resize the background image to cover the entire container */
+    font-family: "Raleway";
+    font-weight: 200;
+}
