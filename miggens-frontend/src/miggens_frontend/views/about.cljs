@@ -24,11 +24,15 @@
            content-metadata (util-strs/get-metadata-by-title content-metadata-list content-title)
            ;about-title (:title content-metadata)
            about-created-on (:createdOn content-metadata)
+           js-date (js/Date. about-created-on)
+           ;dt (util-strs/parse-dt about-created-on)
+           ;date (first dt)
+           ;time (last dt)
            tags-list (:tagsList content-metadata)
            full-contents-list (:fullContentList about-site-content)]
        [:div
         [:p.is-size-2.title-font-weight content-title]
-        [:p.is-size-5 about-created-on]
+        [:p.is-size-4.date (str (+ 1 (.getMonth js-date)) "/" (.getDate js-date) "/" (.getFullYear js-date))]
         [:div.tags.top-bottom
          (for [tag tags-list]
            [:span.tag.is-primary.is-medium {:key tag}
@@ -37,6 +41,6 @@
          (for [paragraph full-contents-list]
            (let [strings-and-links (util-strs/parse-paragraph-links paragraph)]
              [:p.is-size-5.paragraph {:key paragraph}
-              (str strings-and-links)]))]])]
+              strings-and-links]))]])]
     [:div.column.is-3]]
-   (views-core/footer)])
+   (views-core/level-footer)])

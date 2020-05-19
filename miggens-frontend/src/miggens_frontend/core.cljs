@@ -61,8 +61,8 @@
   []
   (enable-console-print!)
   ;(println "*** Loading UI! ***")
-  ;(rf/dispatch [::events/get-contents-metadata])
-  ;(rf/dispatch [::events/get-content-by-title (cstr/replace util-strs/about-site-title #"\s+" "+")])
+  (rf/dispatch [::events/get-contents-metadata])
+  (rf/dispatch [::events/get-content-by-title (cstr/replace util-strs/about-site-title #"\s+" "+")])
   (rf/dispatch-sync [::events/initialize-db])
   (hook-browser-navigation!)
   (mount))

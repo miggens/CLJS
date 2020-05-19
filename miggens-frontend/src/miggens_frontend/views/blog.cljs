@@ -29,8 +29,8 @@
             [:p.is-size-4.top-bottom snippet]
             [:div.tags.top-bottom
              (for [tag tags-list]
-              [:span.tag.is-warning.is-medium {:key tag}
-               tag])]]))
-       )]]])
+               [:span.tag.is-warning.is-medium {:key tag}
+                tag])]])))]]
+   (views-core/level-footer)])
 
 
