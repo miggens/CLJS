@@ -22,17 +22,14 @@
            about-site-content @(rf/subscribe [::subs/about-site-content])
            content-title (:title about-site-content)
            content-metadata (util-strs/get-metadata-by-title content-metadata-list content-title)
-           ;about-title (:title content-metadata)
            about-created-on (:createdOn content-metadata)
            js-date (js/Date. about-created-on)
-           ;dt (util-strs/parse-dt about-created-on)
-           ;date (first dt)
-           ;time (last dt)
+           display-date (str (+ 1 (.getMonth js-date)) "/" (.getDate js-date) "/" (.getFullYear js-date))
            tags-list (:tagsList content-metadata)
            full-contents-list (:fullContentList about-site-content)]
        [:div
         [:p.is-size-2.title-font-weight content-title]
-        [:p.is-size-4.date (str (+ 1 (.getMonth js-date)) "/" (.getDate js-date) "/" (.getFullYear js-date))]
+        [:p.is-size-4.date display-date]
         [:div.tags.top-bottom
          (for [tag tags-list]
            [:span.tag.is-primary.is-medium {:key tag}

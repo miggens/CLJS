@@ -7,6 +7,7 @@
             [clojure.string :as cstr]
             [miggens-frontend.utils.strings :as util-strs]
             [miggens-frontend.views.core :as views]
+            [miggens-frontend.views.developer :as developer]
             [miggens-frontend.views.about :as about]
             [miggens-frontend.views.blog :as blog]
             [miggens-frontend.events.core :as events]
@@ -23,6 +24,7 @@
 
 (def miggens-frontend-views
   {:home #'views/root-view
+   :developer #'developer/page
    :about #'about/page
    :blog #'blog/page})
 
@@ -36,11 +38,20 @@
 
 (secretary/set-config! :prefix "#")
 
+(defroute "/" {:as params}
+  (println "NAVIGATE Home -> " params)
+  (rf/dispatch [::events/navigate :home params]))
+
+(defroute "/developer" {:as params}
+  (println "NAVIGATE Developer -> " params)
+  (rf/dispatch [::events/navigate :developer params]))
+
 (defroute "/about" {:as params}
   (println "NAVIGATE About-> " params)
   (rf/dispatch [::events/navigate :about params]))
 
 (defroute "/blog" {:as params}
+  (println "NAVIGATE Developer -> " params)
   (rf/dispatch [::events/navigate :blog params]))
 
 ;; ******** SET UP ********

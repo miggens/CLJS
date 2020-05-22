@@ -1,13 +1,33 @@
 (ns miggens-frontend.utils.strings
-  (:require [clojure.string :as cstr]))
+  (:require [clojure.string :as cstr]
+            [struct.core :as st]))
 
 (def image-prefix "/img/")
+
+(def web-gl-logo-url "https://img.icons8.com/ios/50/000000/webgl.png")
 
 (def all-contents-metadata-uri "https://api.miggens.com/contents-metadata")
 
 (def get-content-by-title-uri "https://api.miggens.com/content?title=")
 
+(def post-contact-uri "https://api.miggens.com/save-contact")
+;(def post-contact-uri "http://localhost:5000/save-contact")
+
 (def about-site-title "About This Site")
+
+(def developer-page-purpose
+  (str "Unfortunately a degree isn't enough... one must offer a demonstration. Below you'll"
+       " find my efforts, some apps, some repos, some you can run, and others I hope you'll pay."))
+
+(def contact-form-schema 
+  {:name [st/required st/string]
+   :email [st/required st/email]
+   :msg [st/required st/string]})
+
+(defn validate-contact-form
+  ""
+  [contact-form-map]
+  (st/validate contact-form-map contact-form-schema))
 
 (defn parse-dt
   ""

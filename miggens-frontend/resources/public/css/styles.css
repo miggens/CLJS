@@ -30,7 +30,11 @@ a {
 .site-background {
     background-image: linear-gradient(#f4f4f4, #ececec);
     border-radius: 4px;
-    margin-top: 50px;
+}
+
+.base-tile {
+    border-radius: 4px;
+    padding: 10px 10px 10px 10px;
 }
 
 .page-header {

@@ -9,7 +9,13 @@
 (rf/reg-event-db
  ::initialize-db
  (fn [_ _]
-   {:rendered-page :home}))
+   {:rendered-page :home
+    :display-contact-modal false}))
+
+(rf/reg-event-db
+ ::update-contact-modal-display
+ (fn [db [event update]]
+   (assoc db :display-contact-modal update)))
 
 (rf/reg-event-db
  ::navigate
@@ -30,12 +36,32 @@
   event-db)
 
 (rf/reg-event-fx
+ ::post-contact
+ (fn [cofx [event contact-map]]
+   ;(println "POSTING " contact-map)
+   {:db (:db cofx)
+    :http-xhrio {:method :post
+                 :uri util-strs/post-contact-uri
+                 :timeout 8000
+                 :params contact-map
+                 :format (ajax/json-request-format)
+                 :response-format (ajax/json-response-format {:keywords? true})
+                 :on-success [(success-event-db ::post-contact-success
+                                                (fn [db [db-event cmap]]
+                                                  (println "Successfully posted " cmap)
+                                                  db))]
+                 :on-failure [(failure-event-db ::post-contact-failure
+                                                (fn [db [db-event error cmap]]
+                                                  (println "Failed to post " cmap " ERROR " error)
+                                                  db)) contact-map]}}))
+
+(rf/reg-event-fx
  ::get-content-by-title
  (fn [cofx [event title]]
    {:db (assoc (:db cofx) :still-fetching-content-by-title true)
     :http-xhrio {:method :get
                  :uri (str util-strs/get-content-by-title-uri title)
-                 :title 8000
+                 :timeout 8000
                  :response-format (ajax/json-response-format {:keywords? true})
                  :on-success [(success-event-db ::get-content-by-title-success
                                                 (fn [db [db-event kw-title content]]
@@ -50,7 +76,6 @@
 (rf/reg-event-fx                             
  ::get-contents-metadata
  (fn [cofx [event kw]]
-   ;(println "EVENT FX " event " WITH KW " kw)
    {:db   (assoc (:db cofx) :still-fetching-contents-metadata true)   ;; causes the twirly-waiting-dialog to show??
     :http-xhrio {:method          :get
                  :uri             util-strs/all-contents-metadata-uri
@@ -64,4 +89,3 @@
                                                      (fn [db [db-event akw error]]
                                                        (println "Content-Metadata FAILURE " error " AKW " akw)
                                                        (assoc db akw error))) :content-metadata-error]}}))
-;db now contains [{meta1} {meta2}]

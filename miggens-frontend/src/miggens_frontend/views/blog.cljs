@@ -19,13 +19,15 @@
        (for [meta content-metadata-list]
          (let [title (:title meta)
                date (:createdOn meta)
-               snippet (:snippet meta)
+               js-date (js/Date. date)
+               display-date (str (+ 1 (.getMonth js-date)) "/" (.getDate js-date) "/" (.getFullYear js-date))
+               snippet (util-strs/parse-paragraph-links (:snippet meta))
                image-links-list (:imageLinksList meta)
                tags-list (:tagsList meta)
                links-list (:links meta)]
            [:div.blog-side-item.has-text-light.has-background-dark {:key title}
             [:p.is-size-3.top-bottom title]
-            [:p.is-size-6.top-bottom date]
+            [:p.is-size-6.top-bottom.date display-date]
             [:p.is-size-4.top-bottom snippet]
             [:div.tags.top-bottom
              (for [tag tags-list]
